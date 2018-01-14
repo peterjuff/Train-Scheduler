@@ -6,28 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-    <pre id="object"></pre>
-    <form>
-        <input type="text" id="trainName">
-        <input type="text" id="destination">
-        <input type="text" id="arrival">
-        <input type="text" id="frequency">
+    <div class="container">
+            <div class="page-header">
+                    <h1>Train Scheduler <small>get where you're going on time. every time.</small></h1>
+                  </div>
+            <div class="row">
+                <form>
+                <div class="col-md-3">Train Name:<input type="text" id="trainName"></div>
+                <div class="col-md-3">Destination:<input type="text" id="destination"></div>
+                <div class="col-md-3">Arrival:<input type="text" id="arrival"></div>
+                <div class="col-md-3">Frequency:<input type="text" id="frequency"></div>
+                </form> 
+            </div>  
+            <div class="row">
+                <div class="col-md-12"><button id="submit">Submit</button></div>    
+            
+            </div>    
+            <div class="row">
+                <div class="col-md-2"><tr><th>Train Name</th></div>
+                <div class="col-md-2"><th>Destination</th></div>
+                <div class="col-md-2"><th>Frequency</th></div>
+                <div class="col-md-2"><th>Next Arrival</th></div>
+                <div class="col-md-2"><th>Minutes Away</th></div>
+            </div>
+            <tbody></tbody>
 
-    <button id="submit">Submit</button>    
 
 
 
-    </form>
 
-<table>
-    <tr><th>Train Name</th><th>Destination</th><th>Frequency</th><th>Next Arrival</th><th>Time</th></tr>
-    <tbody></tbody>
 
-</table>    
 
-<script src="assets/data.js"></script>    
+    </div>
+    <script src="assets/data.js"></script> 
 </body>
 </html>

@@ -16,7 +16,6 @@ var config = {
   firebase.initializeApp(config);
   console.log(firebase);
 
-// Create a variable to reference the database
 var datab = firebase.database();
 
 console.log(datab);
@@ -52,5 +51,5 @@ $("#submit").on("click", function(event) {
 
 
 })
-//datab.on("value", snap => console.log(snap.val()));
+
 })
