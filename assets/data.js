@@ -4,6 +4,7 @@ var destination;
 var arrival;
 var frequency;
 
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyCZYn12nR0s3NmYKrDg-4KgGhEJJyCpfSY",
@@ -19,6 +20,8 @@ var config = {
 var datab = firebase.database();
 
 console.log(datab);
+
+var time = moment();
 
 datab.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var trainVal = childSnapshot.val().name;
