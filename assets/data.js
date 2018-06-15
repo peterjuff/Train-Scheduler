@@ -3,6 +3,7 @@ var train;
 var destination;
 var arrival;
 var frequency;
+var away;
 
 
 // Initialize Firebase
@@ -28,7 +29,8 @@ datab.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var destinationVal = childSnapshot.val().destination;
   var arrivalVal = childSnapshot.val().arrival;
   var frequencyVal = childSnapshot.val().frequency;
-  $("tbody").append("<tr><td>" + trainVal + "</td><td>" + destinationVal + "</td><td>" + arrivalVal + "</td><td>" + frequencyVal + "</td><td></td></tr>");
+  var minutesAway = childSnapshot.val().away;
+  $("tbody").append("<tr><td>" + trainVal + "</td><td>" + destinationVal + "</td><td>" + arrivalVal + "</td><td>" + frequencyVal + "</td><td>" + minutesAway + "</td></tr>");
 
 
   console.log(childSnapshot.val());
