@@ -62,24 +62,48 @@ $(document).ready(function() {
     var arrivalVal = childSnapshot.val().arrival;
     var frequencyVal = childSnapshot.val().frequency;
     // var away = childSnapshot.val().away;
+
+    var trainTimeCon = moment(arrivalVal, 'hh:mm a').subtract(1, 'years');
+    var currentTime = moment().format('HH:mm a');
+    console.log(currentTime);
+
+    //store variable for difference between current and arrival time
+    var trainTimeDiff = moment().diff(moment(trainTimeCon), 'minutes');
+    console.log(trainTimeDiff);
+
+    var timeLeft = trainTimeDiff % frequencyVal;
+    console.log(timeLeft);
+    //calculate minutes until next train
+    var minutesAway = frequencyVal - timeLeft;
+    console.log(minutesAway);
+
+    var nextArr = moment().add(minutesAway, 'minutes').format('hh:mm a');
+    console.log(nextArr);
+
+
   
 
-    //arrivalVal + frequencyVal is next train
-    var momentArrive = moment(arrivalVal, 'HH:mm').add(frequencyVal, 'minutes').format('hh:mm');  
-    console.log(momentArrive);
+    // //arrivalVal + frequencyVal is next train
+    // var momentArrive = moment(arrivalVal, 'HH:mm').subtract(1, 'years').add(frequencyVal, 'minutes').format('hh:mm');  
+    // console.log(momentArrive);
 
-    //diff between cuurent time and train arrival in minutes is minaway
-    var currentTime = moment();
-    var timeDiff = moment.utc(moment(arrivalVal, 'HH:mm').diff(moment(currentTime, "HH:mm"))).format("HH:mm");
-    var toMinutes = moment.duration(timeDiff).asMinutes();
-    console.log(timeDiff);
-    console.log(toMinutes);
-    var minAway = toMinutes;
+    // //diff between cuurent time and train arrival in minutes is minaway
+    // var currentTime = moment();
+    // var timeDiff = moment.utc(moment(momentArrive, 'HH:mm').diff(moment(currentTime, "HH:mm"))).format("HH:mm");
+    // var toMinutes = moment.duration(timeDiff).asMinutes();
+    // console.log(timeDiff);
+    // console.log(toMinutes);
+    // var minAway = toMinutes;
 
-    console.log(toMinutes);
-    console.log(minAway);
+    // var timeLeft = timeDiff % minAway;
+    // console.log(timeLeft)
 
-    $("tbody").append("<tr><td>" + trainVal + "</td><td>" + destinationVal + "</td><td>" + arrivalVal + "</td><td>" + frequencyVal + "</td><td>" + minAway + "</td></tr>");
+    // var minutesAway = frequencyVal - timeLeft;
+    // console.log(minutesAway);
+    // console.log(toMinutes);
+    // console.log(minAway);
+
+    $("tbody").append("<tr><td>" + trainVal + "</td><td>" + destinationVal + "</td><td>" + arrivalVal + "</td><td>" + frequencyVal + "</td><td>" + nextArr + "</td></tr>");
 
   });
 
