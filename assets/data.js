@@ -34,14 +34,15 @@ $(document).ready(function() {
     train = $("#trainName").val().trim();
     destination = $("#destination").val().trim();
     arrival = $("#arrival").val().trim();
-    frequency = $("#frequency").val().trim();
+    frequency = parseInt($("#frequency").val().trim());
   
     var object = {
       name: train,
       destination: destination,
       arrival: arrival,
       frequency: frequency,
-      away: away
+      momentArrive: momentArrive,
+      minAway: minAway
     };
   
     datab.ref().push(object);
@@ -60,29 +61,26 @@ $(document).ready(function() {
     var destinationVal = childSnapshot.val().destination;
     var arrivalVal = childSnapshot.val().arrival;
     var frequencyVal = childSnapshot.val().frequency;
-    var minutesAway = childSnapshot.val().away;
-    $("tbody").append("<tr><td>" + trainVal + "</td><td>" + destinationVal + "</td><td>" + arrivalVal + "</td><td>" + frequencyVal + "</td><td>" + minutesAway + "</td></tr>");
+    // var away = childSnapshot.val().away;
+  
 
-    console.log(childSnapshot.val().away);
-    console.log(minutesAway)
-    
-    //moment.js
+    //arrivalVal + frequencyVal is next train
+    var momentArrive = moment(arrivalVal, 'HH:mm').add(frequencyVal, 'minutes').format('hh:mm');  
+    console.log(momentArrive);
 
-    // var tfrequency = childSnapshot.val().frequency;
-    var convertedDate = moment(childSnapshot.val().arrival, 'hh:mm').subtract(1, 'years');
-    var trainTime = moment(convertedDate).format('HH:mm');
+    //diff between cuurent time and train arrival in minutes is minaway
     var currentTime = moment();
-    console.log(frequencyVal)
+    var timeDiff = moment.utc(moment(arrivalVal, 'HH:mm').diff(moment(currentTime, "HH:mm"))).format("HH:mm");
+    var toMinutes = moment.duration(timeDiff).asMinutes();
+    console.log(timeDiff);
+    console.log(toMinutes);
+    var minAway = toMinutes;
 
-    // Pushed back 1 year to make sure it comes before current time
-    var firstTimeConverted = moment(trainTime,'hh:mm').subtract(1, 'years');
-    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-    var tRemainder = diffTime % frequencyVal;
+    console.log(toMinutes);
+    console.log(minAway);
 
-    // Create variables for minutes til next train
-    var tMinutesTrain = frequencyVal - tRemainder;
-    var nextTrain = moment().add(tMinutesTrain, 'minutes').format('HH:mm')
-    console.log(tMinutesTrain)
+    $("tbody").append("<tr><td>" + trainVal + "</td><td>" + destinationVal + "</td><td>" + arrivalVal + "</td><td>" + frequencyVal + "</td><td>" + minAway + "</td></tr>");
+
   });
 
   
